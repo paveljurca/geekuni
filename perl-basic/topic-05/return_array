@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Data::Dump 'pp';
+use feature 'say';
+
+sub string_lengths {
+    my @params = @_;
+    my @lengths = map { length } @params;
+
+    return @lengths;
+}
+
+my @lengths = string_lengths(@ARGV);
+say 'String lengths: '.pp(@lengths);

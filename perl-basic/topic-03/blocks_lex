@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+use strict;
+no strict 'vars';
+use warnings;
+
+{
+    my $lex = 'lexical';
+    $glob = 'global';
+
+    print "lex = ".$lex."\n";
+}
+
+print "glob = ".$glob."\n";

@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+for (@ARGV) {print "$_: $ENV{qq($_)}\n" if exists $ENV{qq($_)};}

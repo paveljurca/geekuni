@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my $str = "Hello ".(@ARGV ? join ", ", @ARGV : "World")."!";
+
+say pp($str);
+submit($str);

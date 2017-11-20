@@ -1,0 +1,25 @@
+use Test::More tests => 1;
+
+use strict;
+use warnings;
+use Data::Types qw/:float/;
+
+# tested module loadable
+use_ok('Airport::Data');
+
+# fixture
+my $airports_ref = Airport::Data::parse_airports('t/data/airports1.csv');
+
+###
+# @ Test on data validity
+###
+for my $air (@{ $airports_ref }) {
+    # expected values are non empty
+    ok(exists $air->{$_} and $air->{$_} =~ /\S+/)
+        for (qw/id name latitude_deg longitude_deg iata_code/);
+
+    # latitude and longitude are floats
+    ok(is_float($air->{$_}), 'floating point')
+        for (qw/latitude_deg longitude_deg/);
+}
+

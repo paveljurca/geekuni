@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature ('say', 'state');
+
+my $i;
+sub call_me {
+    $i++;
+    return $i;
+}
+
+say "You have called me ".call_me()." times.";
+say "You have called me ".call_me()." times.";
+say "You have called me ".call_me()." times.";

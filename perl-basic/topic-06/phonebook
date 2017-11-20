@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Data::Dump 'pp';
+use feature 'say';
+
+
+sub search_firstname {
+    my $what = shift;
+    my $where_ref = shift;
+
+    my @results = grep {$_->{firstname} eq $what} @{$where_ref};
+    
+    return \@results;
+}
+
+my $rah_results = search_firstname ($ARGV[0] || '', [
+    { firstname => 'Bill', surname => 'Smith',    phone => 123123213 },
+    { firstname => 'Anne', surname => 'Taylor',   phone => 123123213 },
+    { firstname => 'Bill', surname => 'Sinclair', phone => 9999 }
+]);
+
+
+say pp($rah_results);

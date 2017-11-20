@@ -1,0 +1,18 @@
+.description {
+  overflow: hidden; /* don't put the text to the right of the image */
+  width: 100%; /* make sure the box is big enough */
+}
+
+/* so the items don't get too close to each other */
+div .item {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 220px;
+  height: 300px;
+  background: #CCCC99;
+}
+
+.item img {
+  height: 150px;
+}
+

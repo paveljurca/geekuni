@@ -1,0 +1,28 @@
+<ul class="pager">
+  <li class="previous disabled">
+    <a href="#">Bank balance: <span id="bank_balance">Meeelions will be here!</span></a>
+  </li>
+  <li class="next">
+    <a href="/logout">Logout</a>
+  </li>
+</ul>
+
+<div id="container">
+
+[% FOREACH artwork IN artworks %]
+  <div class="item well">
+    <a class="pull-left" href="/closeup/[% artwork.key %]">
+      <img src="images/[% artwork.value.filename %]" height="150px">
+    </a>
+    <div class="description">
+      <h4>[% artwork.value.title %]</h4>
+      <h4>Price: <span id="price_[% artwork.key %]">This will be replaced with the Price</span></h4>
+      <p>[% artwork.value.artist %], [% artwork.value.year %]</p>
+      <!-- we'll be adding label-danger if it can be sold or label-success if it can be bought -->
+      <span class="label transaction" id="[% artwork.key %]">Buy or Sell</span>
+    </div>
+  </div>
+
+[% END %]
+</div>
+

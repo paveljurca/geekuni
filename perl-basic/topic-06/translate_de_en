@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Data::Dump 'pp';
+use feature 'say';
+
+
+sub translate {
+    my $h_ref = shift;
+    my $a_ref = shift;
+
+    #my @tr;
+    #push @tr, exists $h_ref->{$_} ? $h_ref->{$_} : $_ for (@{$a_ref});
+
+    my @tr = map {exists $h_ref->{$_} ? $h_ref->{$_} : $_ } @{$a_ref};
+
+    return \@tr;
+}
+
+my $ra_en_de_xlat = translate({
+    ich => 'I',
+    bin => 'am',
+    ein => 'a',
+}, [@ARGV]);
+
+say join(' ',@$ra_en_de_xlat);

@@ -1,0 +1,7 @@
+<p>
+<img src="images/[% artwork.filename %]" />
+<br />
+[% artwork.artist %], [% artwork.year %]
+<br />
+[% artwork.title %]
+</p>

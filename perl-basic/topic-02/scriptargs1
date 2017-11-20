@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+
+say $ARGV[0];
+say $ARGV[1];
+say $ARGV[2];

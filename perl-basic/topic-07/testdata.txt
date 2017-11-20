@@ -1,0 +1,3 @@
+this is my file containing data
+for checking pattern matching with a patt on the back!
+only one line contains the p word.

@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+
+sub hello {
+    return 'Hello World';    
+};
+
+my $str = hello();
+say $str;

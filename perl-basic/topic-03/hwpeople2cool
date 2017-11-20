@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use feature 'switch';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my $str = greet(@ARGV);
+
+sub greet {
+  given (scalar @_) {
+    when (0) { "I'm lonely!" }
+    when (1) { "Would you like some tea?" }
+    when (2) { "Hello you two!" }
+    when ($_ < 6) { "Come on in!" }
+    default { "Sorry, you must have the wrong address." }
+  }
+}
+
+say pp($str);
+submit($str);

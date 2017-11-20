@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my ($start, $inc, $max, $k) = (@ARGV, 0);
+
+die "$0 called with unvalid arguments\n"
+   unless @ARGV==3 and ($start < $max) && $inc;
+
+
+for (my $num = $start; $num<=$max; $num+=$inc) {say $num}
+

@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use autodie;
+
+my $match = shift;
+open (my $fh, q(<), shift);
+/$match/ && print while (<$fh>);

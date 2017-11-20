@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use feature 'say';
+
+# bounce.pl
+
+my @arr=({foo => 'bar'}, {tim => 'tam'});
+
+say bounce(@arr);
+say bounce2(\@arr);
+say bounce3(\@arr);
+
+sub bounce {
+    my $hash1_ref = shift; 
+    my $hash2_ref = shift; 
+
+    return $hash1_ref->{foo}.' '.$hash2_ref->{tim};
+}
+sub bounce2 {
+    my $arr_ref = shift;
+
+    my $hash1_ref = $arr_ref->[0]; 
+    my $hash2_ref = $arr_ref->[1]; 
+
+    return $hash1_ref->{foo}.' '.$hash2_ref->{tim};
+}
+sub bounce3 {
+    my $arr_ref = shift;
+
+    my $hash1_ref = shift @{ $arr_ref };
+    my $hash2_ref = shift @{ $arr_ref };
+
+    return $hash1_ref->{foo}.' '.$hash2_ref->{tim};
+}

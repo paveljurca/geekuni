@@ -1,0 +1,21 @@
+<div class="jumbotron">
+  <h1>Well, Hello!</h1>
+
+  <form action="/" method="post">
+    <div class="form-group has-success">
+
+      <label class="control-label" for="NameField">Enter your name:</label>
+      <input type="text" class="form-control" id="NameField" name="login_user">
+
+      <!--
+      <label class="control-label" for="BankBalanceField">Enter your bank balance:</label>
+      <input type="text" class="form-control" id="BankBalanceField" placeholder="1000"  name="bank_balance">
+      -->
+    </div>
+
+    <input class="btn" type="submit" value="Submit" />
+  </form>
+
+</div>
+
+

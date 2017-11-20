@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp dump/;
+use Teach::Tutor;
+
+my @arr = ($ARGV[0] .. $ARGV[1]); 
+submit(@arr);
+say pp(@arr);

@@ -1,0 +1,17 @@
+<h1>
+Hello
+[% IF index_user %]
+    [% index_user %]
+[% ELSE %]
+    World
+[% END %]
+</h1>
+[% FOREACH artwork IN images %]
+<p>
+<a href="/closeup?image_id=[% artwork.key %]"><img src="images/[% artwork.value.filename %]" /></a>
+<br />
+[% artwork.value.artist %], [% artwork.value.year %]
+<br />
+[% artwork.value.title %]
+</p>
+[% END %]

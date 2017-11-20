@@ -1,0 +1,10 @@
+<!doctype html>
+<body>
+<h1>Hello
+[% IF index_user %]
+    [% index_user %]
+[% ELSE %]
+World
+[% END %]
+</h1>
+</body>

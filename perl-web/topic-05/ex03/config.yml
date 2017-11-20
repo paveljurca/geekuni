@@ -1,0 +1,10 @@
+template: "template_toolkit"
+layout: "main"
+session: "Simple"
+logger: "file"
+engines:
+  logger:
+    File:
+      file_name: "art.log"
+      log_dir:   "log"
+      log_level: "debug"

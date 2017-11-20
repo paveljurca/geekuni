@@ -1,0 +1,26 @@
+<ul class="pager">
+  <li class="previous disabled">
+    <a href="#">Bank balance: [% cash_reserve %]</a>
+  </li>
+  <li class="next">
+    <a href="/logout">Logout</a>
+  </li>
+</ul>
+
+<ul class="media-list">
+
+[% FOREACH artwork IN artworks %]
+  <li class="media">
+    <a class="pull-left" href="/closeup?image_id=[% artwork.key %]">
+      <img src="images/[% artwork.value.filename %]" height="150px">
+    </a>
+    <div>
+      <h3>[% artwork.value.title %]</h3>
+      <h4>Price: $[% artwork.value.price %]</h4>
+      <p>[% artwork.value.artist %], [% artwork.value.year %]</p>
+    </div>
+  </li>
+
+[% END %]
+</ul>
+

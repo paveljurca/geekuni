@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp dump/;
+use Teach::Tutor;
+
+my $str = join ":", @ARGV;
+submit($str);
+say pp($str);

@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use autodie;
+
+my $m1 = shift;
+my $m2 = shift;
+
+open (my $fh, q(<), shift);
+while (<$fh>) {
+    s/($m1.*?$m2)/\U$1/g;
+    print;
+}

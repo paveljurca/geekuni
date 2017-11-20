@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my @data = (
+  { value => undef,     representation => q(undef) },
+  { value => 0,         representation => q(0) },
+  { value => '0',       representation => q('0') },
+  { value => '',        representation => q('') },
+  { value => 0.000,     representation => q(0.000) },
+  { value => '0.000',   representation => q('0.000') },
+  { value => "0.000",   representation => q("0.000") },
+  { value => " ",       representation => q(" ") },
+);
+
+
+foreach my $dat (@data) {
+    print "The code [".$dat->{representation}. "] evaluates as ";
+    print $dat->{value} ? "true\n" : "false\n";
+}
+
+my $var;
+print 'When unassigned $var is ';
+
+print $var ? "true\n" : "false\n";

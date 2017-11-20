@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use feature 'say';
+
+sub greet_friend {
+    my $rh_friend = {
+        age     => 5,
+        reading => 'Encyclopedia Britannica',
+        ref $_[0] eq 'HASH' ? %{$_[0]} : @_
+  };
+
+  return sprintf(
+      "Hi %s! I'm %d and I read %s ages ago. Totally boring"
+      . "%s%s",
+      $rh_friend->{name},
+      $rh_friend->{age} + 1,
+      ref $rh_friend->{reading} eq 'ARRAY' ? join " AND ", @{$rh_friend->{reading}} : $rh_friend->{reading},
+      exists $rh_friend->{hobby} ? ". But I like $rh_friend->{hobby} as a hobby" : "",
+      exists $rh_friend->{diet} ? " and $rh_friend->{diet} as a diet." : "."
+  );
+}
+
+say greet_friend(
+  name    => 'Daniela',
+  age     => 16,
+  reading => 'Shakespeare',
+  hobby   => 'Pac Man',
+  diet    => 'Vegan',
+);
+
+say greet_friend({
+    name    => 'Daniela',
+    age     => 16,
+    reading => 'Shakespeare' ,
+    hobby   => 'Pac Man',
+});
+
+say greet_friend(
+    name    => 'Daniela',
+    age     => 16,
+    reading => [
+        'Shakespeare',
+        'The Unbearable Lightness of Being'
+    ] ,
+);

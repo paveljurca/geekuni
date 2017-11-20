@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my @arr = grep {length > 4} @ARGV;
+say pp(@arr);
+submit(@arr);

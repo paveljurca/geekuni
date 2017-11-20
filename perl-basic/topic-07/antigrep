@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Teach::Tutor; 
+use Data::Dump qw/pp/;
+
+my $grep = shift;
+
+my @arr = grep {!/$grep/} @ARGV;
+pp(@arr);
+
+submit(@arr);

@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use autodie;
+use 5.014;
+
+my $match = shift;
+open (my $fh, q(<), shift);
+#print s/($match\S*)/\U$1/gr while (<$fh>);
+
+while (<$fh>) {
+    #my @w = map {uc if /$match/} split / /;
+    my @w = map {/$match/ ? uc : $_} split / /;
+    print join " ", @w;
+}
+

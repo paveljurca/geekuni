@@ -1,0 +1,81 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Time::HiRes qw/time/;
+
+sub get_max_value_key {
+  my %hash_args = @_;
+  my $max_value_key =
+    (sort {$hash_args{$b} <=> $hash_args{$a}} keys %hash_args)[0];
+
+  return $max_value_key;
+}
+
+sub get_max_value_key_2 {
+  my %hash_args = @_;
+  my($max,$key) = 0;
+  for my $k (keys %hash_args) {
+      my $v = $hash_args{$k};
+      ($max = $v, $key = $k) if $v >= $max;
+  }
+  
+  return $key;
+}
+
+### TESTing (efficiency) ###
+# get_max_value_key
+# VS
+# get_max_value_key_2
+
+sub compare_subs {
+    my(%hash,$start,$end,@t) = @_;
+
+    $start = time();
+    get_max_value_key(%hash);
+    $end = time(); 
+    push @t, $end - $start;
+
+    $start = time(); 
+    get_max_value_key_2(%hash);
+    $end = time(); 
+    push @t, $end - $start;
+
+    return \@t;
+}
+
+sub build_hash {
+    my %h;
+    for my $key (1..shift) {
+        $h{$key} = int(rand(1000));
+    }
+
+    return \%h;
+}
+
+
+my %results;
+for my $size ((10,1_000,10_000,100_000)) {
+    #mean
+    my($_sub1,$_sub2);
+    print ">> $size keys <<\n";
+    for my $run (1..9) {
+        my $t_ref = compare_subs(%{build_hash($size)});
+        $_sub1 += $t_ref->[0];
+        $_sub2 += $t_ref->[1];
+        print "[ run #$run ]\n";
+    }
+    $_sub1 /= 9;
+    $_sub2 /= 9;
+
+    #miliseconds
+    $results{$size} = sprintf("%27f ms%27f ms", $_sub1*1000, $_sub2*1000);
+}
+
+## OUTPUT ##
+printf(
+      "%s%15s%30s%30s\n\n",
+      "\n=== RESULTS ===\n\n","",
+      "get_max_value_key","get_max_value_key_2"
+);
+printf("%15s%s\n","$_ keys:",$results{$_})
+        for (sort {$a<=>$b} keys %results);

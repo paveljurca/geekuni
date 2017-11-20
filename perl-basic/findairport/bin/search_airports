@@ -1,0 +1,113 @@
+#!/usr/bin/perl -CA -Ilib -Iextlib/lib/perl5
+
+# -CA flag
+# tells your program to assume the arguments are encoded as UTF-8
+# http://perldoc.perl.org/perlrun.html#%2A-C-%5B_number/list_%5D%2A
+# =>
+# http://stackoverflow.com/questions/2037467/how-can-i-treat-command-line-arguments-as-utf-8-in-perl/2037520#2037520
+# http://stackoverflow.com/questions/6162484/why-does-modern-perl-avoid-utf-8-by-default/6163129
+
+# also
+# % env PERL_UNICODE=AS ./bin/search_airports --matching Ruzyně
+# works
+
+use v5.10.1; 
+#use utf8;
+#use utf8::all;
+
+use strict;
+use warnings;
+use open qw(:std :utf8);
+use autodie;
+
+use Data::Dump qw/pp dd/;
+use Getopt::Long;
+use Text::CSV;
+use Geo::Coder::Google;
+use Airport::Data qw(
+                        parse_airports
+                    );
+use Airport::Search qw(
+                        get_name_matching_airports
+                        get_latlong_matching_airports
+                    );
+
+# == ARGS ==
+
+my $filename = '/home/student/perl-basic/findairport/data/iata_airports.csv';
+my $number = 3; #of max listed results
+my $matching; #string in a name of an airport
+my $word;  #$matching is a whole word | default: false
+my($latitude, $longitude);
+my $distance = 2; #max 255 deg
+my $address; #Letňany, Praha 9, Česká republika;
+
+GetOptions(
+    'filename=s'    => \$filename,
+    'number=i'      => \$number,
+    'address=s'     => \$address,
+    'matching=s'    => \$matching,
+    'word'          => \$word,
+    'latitude=f'    => \$latitude,
+    'longitude=f'   => \$longitude,
+    'distance=f'    => \$distance,
+) or die "$!\n";
+
+#--number check
+die q(--number option can't be < 1) unless $number > 0;
+
+
+# == MAIN ==
+
+my $rah_airports = parse_airports($filename);
+my $rah_airports_found = [];
+
+# -- parsing params --
+
+if ($matching) {
+    $rah_airports_found = get_name_matching_airports(
+        airports          => $rah_airports,
+        matching_string   => $matching,
+        word              => $word,
+    );
+
+    say "Up to " . @{ $rah_airports_found } . " airports matching $matching in $filename:";
+}
+elsif ($latitude && $longitude) {
+    $rah_airports_found = get_latlong_matching_airports(
+        airports        => $rah_airports,
+        lat             => $latitude,
+        long            => $longitude,
+        max             => $distance,
+    );
+
+    say "Up to " . @{ $rah_airports_found } . " airports near [$latitude, $longitude] in $filename:";
+}
+elsif ($address) {
+    my $geo = Geo::Coder::Google->new(apiver => 3);
+    my $coords_ref;
+    eval {
+        $coords_ref = $geo->geocode(location => $address)->{geometry}->{location};
+    } or die "Sorry, can't resolve => $address <= address.\n";
+
+    $rah_airports_found = get_latlong_matching_airports(
+        airports        => $rah_airports,
+        lat             => $coords_ref->{lat},
+        long            => $coords_ref->{lng},
+        max             => $distance,
+    );
+
+    say "Up to " . @{ $rah_airports_found } . " airports near '$address' in $filename:";
+}
+else {
+    die "Must have at least --matching, or --address, or --latitude and --longitude as arguments\n";
+}
+
+# == OUTPUT ==
+
+# shorten the matching results airports list
+# (based on a user preference)
+$#{ $rah_airports_found } = ($number - 1) if @{ $rah_airports_found } > $number;
+
+dd($rah_airports_found); #print data structure to STDOUT
+#say $_->{name} for @{ $rah_airports_found };

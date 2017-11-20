@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use autodie;
+use 5.014;
+
+my $m1 = shift;
+my $m2 = shift;
+
+open (my $fh, q(<), shift);
+print s/($m1.*$m2)/\U$1/gr while (<$fh>);
+

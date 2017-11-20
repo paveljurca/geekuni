@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Teach::Tutor;
+use feature 'say';
+use Data::Dump 'pp';
+
+my %person = (
+    'Action' => 'Says',
+    'Height' => '190cm',
+    'Name' => 'Simon',
+    'Subject' => 'Wash your hands!',
+    'Weight'  => '75kg'
+);
+
+my $arg = shift;
+
+if (exists $person{$arg}) {
+    say $person{$arg};
+    
+    delete $person{$arg};
+}
+
+submit(%person);

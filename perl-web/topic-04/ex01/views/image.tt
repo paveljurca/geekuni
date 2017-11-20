@@ -1,0 +1,11 @@
+<ul class="pager">
+  <li class="previous"><a href="/">Gallery</a></li>
+  <li class="next"><a href="/logout">Logout</a></li>
+</ul>
+
+<img class="media-object" src="/images/[% image_data.filename %]" width="500">
+
+<div>
+  <h3>[% image_data.real_title %]</h3>
+  <p>[% image_data.real_artist %], [% image_data.year %]</p>
+</div>

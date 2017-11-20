@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use strict;
+use feature 'say';
+
+
+my $foooooooooo;  # variable declaration
+
+$foooooooooo = 'bar';
+say $foooooooooo;
+
+

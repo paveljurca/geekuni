@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+
+
+my $foo = "20";
+my $bar = $foo + 1;
+
+print $bar;
+print "\n";
+

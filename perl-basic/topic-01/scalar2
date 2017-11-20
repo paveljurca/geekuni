@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $num1 = '20K'; my $num2 = $num1 + 1;
+
+print $num2;
+print "\n";
+
+
+

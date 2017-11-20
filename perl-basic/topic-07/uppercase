@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+map {tr/a-z/A-Z/} grep /$ARGV[0]/, @ARGV;
+
+print "@ARGV\n";

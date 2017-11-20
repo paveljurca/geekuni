@@ -1,0 +1,9 @@
+<html>
+  <head>
+    <title>GuArt Exchange</title>
+    <link rel="stylesheet" href="/css/page.css" type="text/css" />
+  </head>
+  <body>
+    [% content %]
+  </body>
+</html>

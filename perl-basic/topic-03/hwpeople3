@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my $str = qq(Hello World!\n);
+
+#$str = join '',map {"Hello ".$_."!\n"} @ARGV if @ARGV;
+
+if (@ARGV) { $str=undef;$str.="Hello ".$_."!\n" foreach @ARGV }
+
+say pp($str);
+submit($str);

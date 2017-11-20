@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dump qw/pp/;
+use Teach::Tutor;
+
+my $str = "I'm lonely!";
+
+if (@ARGV && @ARGV<6) {
+$str =
+  @ARGV==1 ? "Would you like some tea?" :
+  @ARGV==2 ? "Hello you two!" : "Come on in!";
+} elsif (@ARGV) {$str="Sorry, you must have the wrong address.";}
+
+say pp($str);
+submit($str);

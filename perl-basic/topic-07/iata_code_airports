@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Text::CSV;
+
+my $file_in = shift; 
+my $file_out = shift; 
+
+#
+open (my $fh_in, '<:encoding(utf8)', $file_in) or die "$!\n";
+open (my $fh_out, '>:encoding(utf8)', $file_out) or die "$!\n";
+
+#
+my $csv = Text::CSV->new( { binary => 1, eol => $/ } );
+my $colnames_ref = $csv->getline( $fh_in );
+my $idx;
+
+for my $i (0 .. $#{ $colnames_ref }) {
+    ($idx=$i, last) if $colnames_ref->[$i] eq 'iata_code'; 
+}
+
+#
+$csv->print($fh_out, $colnames_ref);
+
+while (my $row = $csv->getline( $fh_in )) {
+    $csv->print($fh_out, $row)
+        if $row->[$idx] =~ /\D\S+/;
+}
+
+#
+close($fh_in);
+close($fh_out);

@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Teach::Tutor;
+use feature 'say';
+use Data::Dump 'pp';
+
+my %person= (
+(('Weight', '75kg'),
+('Height', '190cm'),
+('Name', 'Simon'),
+('Action', 'Says'),
+('Subject', 'Wash your hands!'),),
+);
+
+say $person{Action};
+say $person{Height};
+
+submit(%person);

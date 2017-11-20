@@ -1,0 +1,77 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Data::Dump 'pp';
+use feature 'say';
+use Getopt::Long;
+use Text::CSV;
+use autodie;
+
+# == ARGS ==
+
+my $filename = '/home/student/perl-basic/topic-07/iata_airports.csv';
+my $number = 1;
+my $matching; #string
+my $word;  #false
+my($latitude, $longitude);
+
+GetOptions(
+    'filename=s'    => \$filename,
+    'number=i'      => \$number,
+    'matching=s'    => \$matching,
+    'word'          => \$word,
+    'latitude=f'    => \$latitude,
+    'longitude=f'   => \$longitude,
+) or die "bad args!\n";
+
+# ==========
+
+my $rah_airports = parse_airports($filename);
+my $rah_airports_found = [];
+
+sub parse_airports {
+    open(my $fh, '<:encoding(utf8)', shift);
+    my $csv = Text::CSV->new({ binary => 1, eol => $/ });
+    my $colnames_ref = $csv->getline( $fh );
+
+    $csv->column_names(@{$colnames_ref});
+    my $airports_ref = $csv->getline_hr_all($fh);
+
+    return $airports_ref; #array of hashes
+}
+
+sub get_name_matching_airports {
+    my %h = @_;
+    my @matching;
+
+    for my $air_ref (@{ $h{airports} }) {
+        if ($h{word}) {
+            push @matching, $air_ref if $air_ref->{name} =~ /\b$h{matching_string}\b/i;
+        }
+        else {
+            push @matching, $air_ref if $air_ref->{name} =~ /$h{matching_string}/i;
+        }
+    }
+
+    return \@matching;
+}
+
+# == checking ==
+
+if ($matching) {
+    say "Up to $number airports matching $matching in $filename:";
+    $rah_airports_found = get_name_matching_airports(
+        airports          => $rah_airports,
+        matching_string   => $matching,
+        word              => $word,
+    );
+}
+elsif ($latitude && $longitude) {
+    say "Up to $number airports near [$latitude, $longitude] in $filename:"
+}
+else {
+    say "Must have at least --matching, or --latitude and --longitude as arguments";
+}
+
+print pp($rah_airports_found);

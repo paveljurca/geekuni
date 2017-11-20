@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+print "Foo\n" x 100;

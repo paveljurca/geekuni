@@ -1,0 +1,11 @@
+
+my @arr = (
+    pohlavi   => 'zena',
+    poprsi    => 4,
+    boky      => 40,
+);
+
+my(%hash) = (@arr);
+
+$"="\n";
+print "" . [ keys %hash ] . "";  

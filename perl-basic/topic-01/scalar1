@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Teach::Tutor;
+
+my $foo;
+
+$foo = "bar\n";
+submit ($foo);
+
+

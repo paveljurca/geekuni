@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+use v5.10.1;
+use strict;
+use warnings;
+use Text::CSV;
+#use open qw(:std :utf8);
+
+my $file_in = 'src/airports1.csv';
+my $file_out = 'airports1.csv';
+
+#die qq("$file_out" already exists\n) if -e $file_out;
+
+open(my $fh_in, '<:encoding(utf8)', $file_in)
+    or die qq(no "$file_in" file\n);
+open(my $fh_out, '>:encoding(utf8)', $file_out)
+    or die qq($!\n);
+
+my $csv = Text::CSV->new({binary=>1,eol=>$/});
+
+#first row
+my $fields = $csv->getline($fh_in);
+
+$csv->column_names($fields);
+my $rows = $csv->getline_hr_all($fh_in);
+
+#$csv->print(\*STDOUT, ... );
+
+$csv->print($fh_out, $fields);
+$csv->print($fh_out, [ @$_{@{ $fields }} ])
+    for (
+        grep {
+            #smart_match
+            $_->{id} ~~ [qw/2434 3622 4185 5627 27145/]
+        } @{ $rows }
+    );
+
+close($fh_in);

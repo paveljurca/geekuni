@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+use strict;
+use 5.010.1;
+
+my $var;
+
+say $_ == 0 for qw/
+  undef,
+  0,
+  '',
+  0.000,
+  '0.000',
+  "0.000",
+  " ",
+  $var,
+  '0'
+/;

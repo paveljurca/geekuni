@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Data::Dump 'pp';
+use feature 'say';
+use Teach::Tutor;
+
+my $i = $ARGV[0];
+my @intarr;
+until ($i-- < 1) {
+    next if $i == 5;
+    if ($i == 9) {
+        $i = 6;
+        redo;
+    }
+    push (@intarr, $i);
+    last if $i == 3;
+}
+say pp(@intarr);
+submit (@intarr);

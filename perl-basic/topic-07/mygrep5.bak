@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use autodie;
+
+my $m1 = shift;
+my $m2 = shift;
+
+open (my $fh, q(<), shift);
+while (my $l = <$fh>) {
+    print join " ", map {
+            /$m1/ .. /$m2/ ? uc : $_
+        } split / /, $l;
+}

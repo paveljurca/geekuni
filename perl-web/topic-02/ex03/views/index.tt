@@ -1,0 +1,11 @@
+<h1>
+Hello
+[% IF index_user %]
+    [% index_user %]
+[% ELSE %]
+    World
+[% END %]
+</h1>
+[% FOREACH image IN images %]
+<img src="images/[% image %]" />
+[% END %]

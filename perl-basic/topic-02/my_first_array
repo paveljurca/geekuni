@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Teach::Tutor;
+
+my @arr = qw/A B C/;
+submit(@arr);
